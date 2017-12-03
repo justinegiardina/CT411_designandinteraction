@@ -1,23 +1,30 @@
-var circX;
-var circY;
-var circDiameter = 350;
+var circX = 400;
+var circY = 400;
+var circDiameter = 400;
 var circRadius = circDiameter/2;
-var circlX;
-var circlY;
-var circlDiameter = 350;
+var circlX = 600;
+var circlY = 100;
+var circlDiameter = 400;
 var circlRadius = circlDiameter/2;
 var d;
 var d2;
 var img;
 var img2;
 var img3;
-var buttonClicked = false;
+var isClicked = false;
 var audio;
 var index = 0;
 var increment=280;
 var xpos1 =-80;
 var xpos2 = 60;
-var isClicked = false;
+var rectX = 400;
+var rectY = 400;
+var rectSize = 400;
+var rectTop = rectY;
+var rectBottom = rectY + rectSize;
+var rectLeft = rectX;
+var rectRight = rectX + rectSize;
+var buttonClicked = false;
 
 var sun = ["A cow fed roses is still a cow.", "Punishment is longer remembered than reward.", "Anger is useful if channeled correctly.", "Being alone is productive, being isolated is detrimental.", "Honesty is uncomfortable.", "Adamant attachments stem from early inconsistencies.", "Kill your darlings, fast.", "Ambivalence will prevail.", "Considering posibilities isn't always useful.", "Remember to forget."];
 
@@ -38,16 +45,21 @@ function setup(){
     textSize(36);
     audio.play();
     audio.loop();
-    circX = windowWidth / 4;
-    circY = windowHeight / 2;
-    circlX = windowWidth/2;
-    circlY = windowHeight/2-60;
+    circX = 400;
+    circY = 400;
+    circlX = 600;
+    circlY = 100;
 }
 
 function draw(){
     fill(255);
     background(img);
     background(random(240), random (30), random(200), random(75));
+    
+    fill(255,255,255,75)
+    rect(400,400,400,400);
+    fill(0,255,0);
+        ellipse(200,200,200,200);
     
     
     for (var i=0; i<12;i++){
@@ -72,27 +84,28 @@ function draw(){
     
     fill (255, 255, 255, 0);
     noStroke();
-    ellipse(circX, circY, circDiameter, circDiameter);
+    ellipse(400, 400, 400, 400);
     d = dist(circX, circY, mouseX, mouseY);
-    
-      ellipse(circlX, circlY, circlDiameter, circlDiameter);
+      ellipse(600, 100, 400, 400);
     d2 = dist(circlX, circlY, mouseX, mouseY);
     
     fill(255);
         if (d < circRadius) {
-            image(img2, width/5, height/2, 230, 230);
+            image(img2, 400, 400, 230, 230);
         fill (5, 0, 0);
         text("Enlighten.", mouseX, mouseY, 200, 800);
             background(240, 60, 100, 75);
     } else if (d2 < circlRadius) {
-            image(img3, windowWidth/2-100, windowHeight/2-100, 300, 305);
+            image(img3, 600, 100, 300, 300);
         fill (0, 0, 5);
         text("Illuminate.", mouseX, mouseY, 200, 800);
             background(70, 60, 240, 70);} else {    
-    image(img2, width/5, height/2, 250, 250);
-                    image(img3, windowWidth/2-100, windowHeight/2-100, 330, 335);
+    image(img2, 400, 400, 250, 250);
+                    image(img3, 600, 100, 335, 335);
        text("Click one to have your fortune told.", mouseX, mouseY, 400, 800);    
     }    
+    
+    
 }
 
 
@@ -104,17 +117,34 @@ fill (204, random(51), 0, 100);
 }
 
 function mousePressed(){
-    //MOUSEPRESSED+ENCLOSED AREA=ARRAY?? HOW?
-    if(d < circRadius && isClicked == false){
-        text(random(sun[index]), 50, height/2);
-        isClicked = !isClicked;
+    if  (d < circRadius){
+        fill(255,0,0);
+        ellipse(100,100,800,800);
+       text(random(sun[index]), 50, height/2);
         }
-    
-    if (d2 < circlRadius && isClicked == false) {
-        text(random(moon[index]), 50, height/2);
-        isClicked = !isClicked;
-        }   
+    else{
+        fill(255);
+        ellipse(200,200,800,800);
+        text(random(sun[index]), 50, height/2);
     }
+    
+    if (d2 < circlRadius) {
+              fill(255);
+        ellipse(200,200,800,800);
+        text(random(moon[index]), 50, height/2);
+        }   else{
+            text(random(moon[index]), 50, height/2);
+        }
+    if(mouseX > rectLeft && mouseX < rectRight && mouseY > rectTop && mouseY < rectBottom && buttonClicked==false){
+        fill(255);
+        ellipse(200,200,200,200);
+        buttonClicked = !buttonClicked;
+    }else if (mouseX > rectLeft && mouseX < rectRight && mouseY > rectTop && mouseY < rectBottom && buttonClicked==true){
+        fill(255,0,0);
+        ellipse(200,200,200,200);
+        buttonClicked = !buttonClicked;
+    }
+}
 
 
 
