@@ -26,6 +26,7 @@ var rectLeft = rectX;
 var rectRight = rectX + rectSize;
 var buttonClicked = false;
 var randomPull;
+var randomPull_moon;
 var Pull;
 var fortuneRendered = false;
 var fortuneTrue = false;
@@ -97,6 +98,7 @@ function draw(){
         fill(255);
 
         if(fortuneTrue){
+//            background(0);
             text(moon[randomPull], width/4, height/2);
         }
 
@@ -119,7 +121,7 @@ function mousePressed(){
         randomPull = floor(random(0,sun.length));
         fortuneRendered = !fortuneRendered;
         
-    } if (d < circlRadius) {
+    } if (d2 < circlRadius) {
         randomPull = floor(random(0,moon.length));
         fortuneTrue = !fortuneTrue;
     }
